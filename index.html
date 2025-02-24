@@ -6,6 +6,7 @@
 </head>
 <body>
 <div id="root"></div>
+
 <script type="module">
     import React, {render} from "./react.js";
 
@@ -16,6 +17,21 @@
         ele = React.createElement("div", {title: "1234"}, React.createElement("p", null, "test1"));
         render(ele, document.getElementById("root"));
     }, 1000);
+</script>
+
+<script type="module">
+    import SimpleScheduler, {UserBlockingPriority, ImmediatePriority} from "./requestIdleCallback.js"
+
+    const s = new SimpleScheduler();
+    s.scheduleCallback(UserBlockingPriority, () => {
+        console.log("3");
+    });
+    s.scheduleCallback(ImmediatePriority, () => {
+        console.log("1");
+    });
+    s.scheduleCallback(ImmediatePriority, () => {
+        console.log("2");
+    });
 </script>
 
 </body>
